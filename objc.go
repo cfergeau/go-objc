@@ -4,6 +4,7 @@ package main
 #cgo darwin CFLAGS: -mmacosx-version-min=11 -x objective-c
 #cgo darwin LDFLAGS: -lobjc -framework Foundation
 
+#import "disk.h"
 #import "objc.h"
 #import "stdlib.h"
 */
@@ -36,4 +37,16 @@ func main() {
 
 	// Call objc function which will call the golang Print function
 	C.helloWorldGo()
+
+	// More advanced test using virtualization framework methods
+	attachment, err := NewDiskImageStorageDeviceAttachment("/dev/zero", true)
+	if err != nil {
+		panic(err.Error())
+	}
+	config, err := NewVirtioBlockDeviceConfiguration(attachment)
+	if err != nil {
+		panic(err.Error())
+	}
+	C.releaseNSObject(attachment.pointer)
+	C.releaseNSObject(config.pointer)
 }
