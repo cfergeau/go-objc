@@ -1,6 +1,9 @@
 package main
 
-import "C"
+import (
+	"fmt"
+	"unsafe"
+)
 
 /*
 #cgo darwin CFLAGS: -mmacosx-version-min=11 -x objective-c
@@ -11,9 +14,22 @@ void helloWorld()
 {
 	NSLog(@"Hello, World! \n");
 }
+
+char *getHelloWorld()
+{
+	NSString *helloStr = @"Hello, World! \n";
+	return strdup([helloStr UTF8String]);
+}
 */
+import "C"
 
 func main() {
 	// Call objc function
 	C.helloWorld()
+
+	// Call objc function returning a string, and print it from go
+	helloc := C.getHelloWorld()
+	hello := C.GoString(helloc)
+	fmt.Printf(hello)
+	C.free(unsafe.Pointer(helloc))
 }
