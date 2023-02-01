@@ -1,34 +1,17 @@
 package main
 
+/*
+#cgo darwin CFLAGS: -mmacosx-version-min=11 -x objective-c
+#cgo darwin LDFLAGS: -lobjc -framework Foundation
+
+#import "objc.h"
+#import "stdlib.h"
+*/
+import "C"
 import (
 	"fmt"
 	"unsafe"
 )
-
-/*
-#cgo darwin CFLAGS: -mmacosx-version-min=11 -x objective-c
-#cgo darwin LDFLAGS: -lobjc -framework Foundation
-#import <Foundation/Foundation.h>
-
-void helloWorld()
-{
-	NSLog(@"Hello, World! \n");
-}
-
-char *getHelloWorld()
-{
-	NSString *helloStr = @"Hello, World! \n";
-	return strdup([helloStr UTF8String]);
-}
-
-void print(const char *str)
-{
-	NSLog(@"%s", str);
-}
-*/
-import "C"
-
-// import "C" has to be right after the code block, and no blank line!
 
 func main() {
 	// Call objc function
