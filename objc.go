@@ -23,6 +23,8 @@ char *getHelloWorld()
 */
 import "C"
 
+// import "C" has to be right after the code block, and no blank line!
+
 func main() {
 	// Call objc function
 	C.helloWorld()
