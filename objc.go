@@ -20,6 +20,11 @@ char *getHelloWorld()
 	NSString *helloStr = @"Hello, World! \n";
 	return strdup([helloStr UTF8String]);
 }
+
+void print(const char *str)
+{
+	NSLog(@"%s", str);
+}
 */
 import "C"
 
@@ -34,4 +39,9 @@ func main() {
 	hello := C.GoString(helloc)
 	fmt.Printf(hello)
 	C.free(unsafe.Pointer(helloc))
+
+	// Call objc function with a string argument
+	cstr := C.CString("Hello, World! \n")
+	C.print(cstr)
+	C.free(unsafe.Pointer(cstr))
 }
