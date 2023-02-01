@@ -13,6 +13,12 @@ import (
 	"unsafe"
 )
 
+//export Print
+func Print(cstr *C.char) {
+	gostr := C.GoString(cstr)
+	fmt.Print(gostr)
+}
+
 func main() {
 	// Call objc function
 	C.helloWorld()
@@ -27,4 +33,7 @@ func main() {
 	cstr := C.CString("Hello, World! \n")
 	C.print(cstr)
 	C.free(unsafe.Pointer(cstr))
+
+	// Call objc function which will call the golang Print function
+	C.helloWorldGo()
 }

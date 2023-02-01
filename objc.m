@@ -16,3 +16,8 @@ void print(const char *str)
 {
 	NSLog(@"%s", str);
 }
+
+void helloWorldGo()
+{
+	Print("Hello, World! \n");
+}
