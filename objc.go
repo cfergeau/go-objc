@@ -49,4 +49,6 @@ func main() {
 	}
 	C.releaseNSObject(attachment.pointer)
 	C.releaseNSObject(config.pointer)
+
+        fmt.Println(vfkitCmdline())
 }
